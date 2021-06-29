@@ -50,11 +50,14 @@ describe('calculator-form-test-suite', () => {
       target: { value: '1' }
     })
     fireEvent.change(screen.getByTestId(selectors.input.operator), {
-      target: { value: '-' }
+      target: { value: '+' }
     })
     fireEvent.change(screen.getByTestId(selectors.input.second), {
       target: { value: '2' }
     })
+
+    fireEvent.click(screen.getByTestId(selectors.button.calculate))
+
     expect(screen.getByTestId(selectors.input.ans)).toHaveValue('3');
 
 
