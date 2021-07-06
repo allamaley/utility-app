@@ -8,14 +8,36 @@ class Calculator extends Component {
 
   constructor(props) {
     super(props);
+    console.log('constructor')
 
     this.state = {
-      firstNo: '10',
-      secondNo: '20',
-      ans: '30',
-      operation: '+',
+      firstNo: '',
+      secondNo: '',
+      ans: '',
+      operation: '',
     };
 
+  }
+
+  //lifecycle methods (noly availible in class based components)
+
+  async componentDidMount() {
+    //api calls for the data?
+    console.log('componentDidMount')
+    const url = 'https://my-json-server.typicode.com/mehulchopradev/calc-service/defaultCalcData';
+    const response = await fetch(url);
+    const jsonResponse = await response.json();
+    this.setState(jsonResponse)
+  }
+
+  componentDidUpdate() {
+    //whenever state/props change in compoennt
+    console.log('componentDidUpdate() in calculator')
+  }
+
+  componentWillUnmount() {
+    //clear up/close resources
+    console.log('componentWillUnmount() in calculator')
   }
 
   handleChange = e => {
@@ -23,6 +45,7 @@ class Calculator extends Component {
     this.setState({
       [name]: value,
     });
+    //this causes render to run
   }
 
   handleOperationChange = ({ target: { value } }) => {
@@ -38,6 +61,7 @@ class Calculator extends Component {
   }
 
   render() {
+    console.log('render() in calculator')
     return (
       <div>
         <CalculatorForm

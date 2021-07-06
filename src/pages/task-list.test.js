@@ -99,6 +99,5 @@ describe('task  list testlc', () => {
     fireEvent.click(screen.getByText('Clear completed todos'));
 
     expect(screen.queryAllByText('todo1')).toHaveLength(0);
-
   });
 });

@@ -1,7 +1,12 @@
 import './todo-list.styles.scss';
-import TodoItem from '../todo/todo-item.component'
+import React from 'react';
+import TodoItem from '../todo/todo-item.component';
 
 function TodoList({ todos, handleChange }) {
+  console.log('todo list renders:')
+  // todo fix: unessecary to rerender when checkbox is clicked! 
+
+
   return (
     <div className="todo-list">
       {
@@ -19,4 +24,4 @@ function TodoList({ todos, handleChange }) {
   )
 }
 
-export default TodoList;
+export default React.memo(TodoList); //returns a memoized version of the functional component TodoList. It is an optimal component where for passed arguments for the same set will return the saved image of this component (carets a chached versions for different props values)

@@ -29,7 +29,7 @@ describe('todo  liformst testlc', () => {
   });
 
 
-  test('it addsa new todo', () => {
+  test('it adds a new todo', () => {
     let todoText;
     const onNewTodo = (newTodo) => {
       todoText = newTodo;
@@ -43,7 +43,7 @@ describe('todo  liformst testlc', () => {
     fireEvent.click(screen.getByRole('button'));
 
     expect(screen.getByRole('textbox')).toHaveValue('');
-    expect(screen.getByRole('button')).toBeEnabled();
+    expect(screen.getByRole('button')).toBeDisabled();
     expect(todoText).toBe('todo1');
 
 
