@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import {connect} from 'react-redux'
+import { addTodo } from '../../redux/todos/todos.actions.js';
 
 function TodoForm({ onNewTodo }) {
 
@@ -36,4 +38,8 @@ function TodoForm({ onNewTodo }) {
   )
 }
 
-export default TodoForm;
+const mapDispatchToProps = (dispatch) => ({
+  onNewTodo : (newTodoTitle) => dispatch(addTodo(newTodoTitle))
+})
+
+export default connect(null, mapDispatchToProps)(TodoForm);
