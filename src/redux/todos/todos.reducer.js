@@ -1,3 +1,5 @@
+import TodoActionTypes from "./todos.types";
+
 const INITIAL_STATE = {
   todos: []
 }
@@ -5,7 +7,7 @@ const INITIAL_STATE = {
 // action: type and payload
 const todosReducer = (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case TodoActionTypes.ADD_TODO:
       return {
         ...currentState,
         todos: currentState.todos.concat([{
@@ -14,7 +16,7 @@ const todosReducer = (currentState = INITIAL_STATE, action) => {
           createDate: new Date(),
         }])
       }
-    case 'REMOVE_TODOS':
+    case TodoActionTypes.REMOVE_TODOS:
       const todosToRemove = action.payload;
       return {
         ...currentState,

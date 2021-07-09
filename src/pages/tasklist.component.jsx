@@ -47,7 +47,8 @@ function TaskList({ removeCompletedTodos }) {
 // });
 
 const mapDispatchToProps = (dispatch) => ({
-  removeCompletedTodos: (todosToRemove) => dispatch(removeTodos(todosToRemove))
+  removeCompletedTodos: (todosToRemove) => dispatch(removeTodos(todosToRemove)),
+  // here can be as many actions as needed
 })
 
 // export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

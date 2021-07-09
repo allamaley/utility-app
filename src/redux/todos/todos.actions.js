@@ -1,9 +1,11 @@
+import TodoActionTypes from "./todos.types";
+
 export const addTodo = (newTodoTitle) => ({
-  type: 'ADD_TODO',
+  type: TodoActionTypes.ADD_TODO,
   payload: newTodoTitle,
 });
 
 export const removeTodos = (todosToRemove) => ({
-  type: 'REMOVE_TODO',
+  type: TodoActionTypes.REMOVE_TODOS,
   payload: todosToRemove,
 });

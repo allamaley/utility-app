@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Link } from 'react-router-dom';
 
 import Calculator from './pages/calculator.component';
-import Library from './pages/library.component';
+import Library from './pages/library/library.component';
 import Tasklist from './pages/tasklist.component';
 
 function App() {
