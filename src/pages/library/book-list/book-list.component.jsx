@@ -1,6 +1,7 @@
 import './book-list.styles.scss';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function BookList({ books }) {
   return (
@@ -18,7 +19,9 @@ function BookList({ books }) {
             <tr key={id}>
               <td>{id}</td>
               <td>{title}</td>
-              <td><a href="#">Details</a></td>
+              <td>
+                <Link to={`/library/book-details/${id}`}>Details</Link>
+              </td>
             </tr>
           ))
         }
