@@ -7,7 +7,7 @@ import BookList from "./book-list/book-list.component";
 import BookDetails from "./book-details/book-details.component";
 import { fetchBooksAsync } from "../../redux/library/library.actions";
 
-function Library({ match, isLoading, books, dispatch /*, onSetBooks*/ }) {
+function Library({ match, isBooksLoading, dispatch /*, onSetBooks*/ }) {
   useEffect(() => {
     dispatch(fetchBooksAsync());
   }, [dispatch]); //dep array to prevent lint error (symathic)
@@ -17,13 +17,18 @@ function Library({ match, isLoading, books, dispatch /*, onSetBooks*/ }) {
       <Route exact path={match.path}>
         <Redirect to={`${match.path}/book-list`} />
       </Route>
+      {!isBooksLoading ? (
+        <h2>Loading... Please waitttt</h2>
+      ) : (
+        <>
+          <Route path={`${match.path}/book-list`} component={BookList} />
 
-      <Route path={`${match.path}/book-list`} component={BookList} />
-
-      <Route
-        path={`${match.path}/book-details/:bookId`}
-        component={BookDetails}
-      />
+          <Route
+            path={`${match.path}/book-details/:bookId`}
+            component={BookDetails}
+          />
+        </>
+      )}
     </div>
   );
 }
@@ -33,8 +38,7 @@ function Library({ match, isLoading, books, dispatch /*, onSetBooks*/ }) {
 // });
 
 const mapStateToProps = (state) => ({
-  isLoading: state.libraryReducer.isLoading,
-  books: state.libraryReducer.books,
+  isBooksLoading: state.libraryReducer.isBooksLoading,
 });
 // export default connect(null, mapDispatchToProps)(Library);
 export default connect(mapStateToProps)(Library);
