@@ -3,7 +3,10 @@ import './book-list.styles.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function BookList({ books }) {
+function BookList({ books, isLoading }) {
+  if (isLoading) {
+    return <h2>Loading...</h2>
+  }
   return (
     <table>
       <thead>
@@ -32,6 +35,7 @@ function BookList({ books }) {
 
 const mapStatetoProps = (state) => ({
   books: state.libraryReducer.books,
+  isLoading: state.libraryReducer.isLoading,
 });
 
 export default connect(mapStatetoProps)(BookList);
