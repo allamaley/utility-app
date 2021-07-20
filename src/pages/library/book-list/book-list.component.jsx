@@ -8,6 +8,7 @@ function BookList({ books, isLoading }) {
     return <h2>Loading...</h2>
   }
   return (
+    <div className='book-list-container'>
     <table>
       <thead>
         <tr>
@@ -29,7 +30,9 @@ function BookList({ books, isLoading }) {
           ))
         }
       </tbody>
-    </table>
+      </table>
+      </div>
+      
   )
 };
 

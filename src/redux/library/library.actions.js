@@ -1,12 +1,13 @@
+import LibraryActionTypes from "./library.types"
 import axios from "axios";
-import LibraryActionTypes from "./library.types";
 
-export const startFetch = () => ({
-  type: LibraryActionTypes.START_FETCH,
+export const startBooksFetch = () => ({
+  type: LibraryActionTypes.START_BOOKS_FETCH,
   payload: null,
 });
-export const startFetchBook = () => ({
-  type: LibraryActionTypes.START_FETCH_BOOK,
+
+export const startBookFetch = () => ({
+  type: LibraryActionTypes.START_BOOK_FETCH,
   payload: null,
 });
 
@@ -16,38 +17,39 @@ export const setBooks = (books) => ({
 });
 
 export const setBook = (book) => ({
-  //returns a JS Object
   type: LibraryActionTypes.SET_BOOK,
   payload: book,
 });
 
-export const endFetch = () => ({
-  type: LibraryActionTypes.END_FETCH,
+export const endBooksFetch = () => ({
+  type: LibraryActionTypes.END_BOOKS_FETCH,
   payload: null,
 });
-export const endFetchBook = () => ({
-  type: LibraryActionTypes.END_FETCH_BOOK,
+
+export const endBookFetch = () => ({
+  type: LibraryActionTypes.END_BOOK_FETCH,
   payload: null,
 });
 
 export const fetchBooksAsync = () => {
   return async (dispatch) => {
-    dispatch(startFetch());
+    dispatch(startBooksFetch());
 
-    const response = await axios.get("http://localhost:3003/books");
+    const response = await axios.get('http://localhost:3003/books');
     const { data } = response;
+
     dispatch(setBooks(data));
 
-    dispatch(endFetch());
-  };
-};
+    dispatch(endBooksFetch());
+  }
+}
 
 export const fetchBookAsync = (bookId) => {
   return async (dispatch) => {
-    dispatch(startFetch());
-    const resp = await axios.get(`http://localhost:3003/books/${bookId}`);
-    const { data: book } = resp;
+    dispatch(startBookFetch());
+    const response = await axios.get(`http://localhost:3003/books/${bookId}`);
+    const { data: book } = response;
     dispatch(setBook(book));
-    dispatch(endFetch());
-  };
-};
+    dispatch(endBookFetch());
+  }
+}

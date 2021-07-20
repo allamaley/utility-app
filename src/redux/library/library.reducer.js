@@ -2,21 +2,21 @@ import LibraryActionTypes from "./library.types";
 
 const INITIAL_STATE = {
   books: [],
-  isLoading: false, // for the books
-  isBookLoading: false, //for a single book
+  isBooksLoaded: false,
+  isLoading: false,
 };
 
 const libraryReducer = (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LibraryActionTypes.START_FETCH:
+    case LibraryActionTypes.START_BOOKS_FETCH:
+      return {
+        ...currentState,
+        isBooksLoaded: false,
+      };
+    case LibraryActionTypes.START_BOOK_FETCH:
       return {
         ...currentState,
         isLoading: true,
-      };
-    case LibraryActionTypes.START_FETCH_BOOK:
-      return {
-        ...currentState,
-        isBookLoading: true,
       };
     case LibraryActionTypes.SET_BOOKS:
       return {
@@ -31,15 +31,15 @@ const libraryReducer = (currentState = INITIAL_STATE, action) => {
           book.id === updatedBook.id ? updatedBook : book
         ),
       };
-    case LibraryActionTypes.END_FETCH:
+    case LibraryActionTypes.END_BOOKS_FETCH:
+      return {
+        ...currentState,
+        isBooksLoaded: true,
+      };
+    case LibraryActionTypes.END_BOOK_FETCH:
       return {
         ...currentState,
         isLoading: false,
-      };
-    case LibraryActionTypes.END_FETCH_BOOK:
-      return {
-        ...currentState,
-        isBookLoading: false,
       };
     default:
       return currentState;
