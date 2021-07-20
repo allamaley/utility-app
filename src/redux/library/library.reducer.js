@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   books: [],
   isBooksLoaded: false,
   isLoading: false,
+  isPostLoading: false,
 };
 
 const libraryReducer = (currentState = INITIAL_STATE, action) => {
@@ -40,6 +41,22 @@ const libraryReducer = (currentState = INITIAL_STATE, action) => {
       return {
         ...currentState,
         isLoading: false,
+      };
+    case LibraryActionTypes.START_BOOK_POST:
+      return {
+        ...currentState,
+        isPostLoading: true,
+      };
+    case LibraryActionTypes.NEW_BOOK:
+      const { payload: newBook } = action;
+      return {
+        ...currentState,
+        books: currentState.books.concat([newBook]),
+      };
+    case LibraryActionTypes.END_BOOK_POST:
+      return {
+        ...currentState,
+        isPostLoading: false,
       };
     default:
       return currentState;
