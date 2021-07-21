@@ -8,6 +8,8 @@ const LibraryActionTypes = {
   START_BOOK_POST: "START_BOOK_POST",
   NEW_BOOK: "NEW_BOOK",
   END_BOOK_POST: "END_BOOK_POST",
+  OPEN_MODAL: "OPEN_MODAL",
+  CLOSE_MODAL: "CLOSE_MODAL",
 };
 
 export default LibraryActionTypes;

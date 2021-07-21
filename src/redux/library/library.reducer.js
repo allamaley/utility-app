@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   isBooksLoaded: false,
   isLoading: false,
   isPostLoading: false,
+  modalClosed: true,
 };
 
 const libraryReducer = (currentState = INITIAL_STATE, action) => {
@@ -57,6 +58,17 @@ const libraryReducer = (currentState = INITIAL_STATE, action) => {
       return {
         ...currentState,
         isPostLoading: false,
+        modalClosed: true,
+      };
+    case LibraryActionTypes.OPEN_MODAL:
+      return {
+        ...currentState,
+        modalClosed: false,
+      };
+    case LibraryActionTypes.CLOSE_MODAL:
+      return {
+        ...currentState,
+        modalClosed: true,
       };
     default:
       return currentState;

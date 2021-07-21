@@ -46,6 +46,16 @@ export const endBookPost = () => ({
   payload: null,
 });
 
+export const openModal = () => ({
+  type: LibraryActionTypes.OPEN_MODAL,
+  payload: null,
+});
+
+export const closeModal = () => ({
+  type: LibraryActionTypes.CLOSE_MODAL,
+  payload: null,
+});
+
 export const fetchBooksAsync = () => {
   return async (dispatch) => {
     dispatch(startBooksFetch());
