@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
+import {useUsers} from '../hooks/users.hooks'
 function UsersList() {
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async (req, res) => {
-      const { data: users } = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsers(users);
-    };
-    fetchUsers();
-  }, []);
+  const users = useUsers();
+  
   return (
     <ul>
       {users.map((user) => (

@@ -1,51 +1,59 @@
-import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import CalculatorForm from '../components/calculator-form/calculator-form.component'
-import CalcResults from '../components/calc-results/calc-results.component'
-
+import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import CalculatorForm from "../components/calculator-form/calculator-form.component";
+import CalcResults from "../components/calc-results/calc-results.component";
 
 function Calculator({ shouldFetchDefaultData = true, todos }) {
-
   const [calcData, setCalcData] = useState({
-    firstNo: '',
-    secondNo: '',
-    ans: '',
-    operation: '',
+    firstNo: "",
+    secondNo: "",
+    ans: "",
+    operation: "",
   });
 
   useEffect(() => {
-    if (!shouldFetchDefaultData) { return }
-    const url = 'https://my-json-server.typicode.com/mehulchopradev/calc-service/defaultCalcData';
+    if (!shouldFetchDefaultData) {
+      return;
+    }
 
     const fetchDefaultData = async () => {
+      const url =
+        "https://my-json-server.typicode.com/mehulchopradev/calc-service/defaultCalcData";
+
       const response = await fetch(url);
-      const jsonResponse = await response.json();
-      setCalcData(jsonResponse);
+      if (!response.ok) {
+        //error habdling logic
+        setCalcData(null);
+      } else {
+        const jsonResponse = await response.json();
+        setCalcData(jsonResponse);
+      }
     };
 
     fetchDefaultData();
 
     return () => {
       // clean up code on ComponentUnmount
-      console.log('returned here')
-    }
-  }, []); //empty array of dependencies - ensures that side effect is executed only once when the component first renders
+      console.log("returned here");
+    };
+  }, [shouldFetchDefaultData]); //empty array of dependencies - ensures that side effect is executed only once when the component first renders
 
-
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setCalcData({ ...calcData, [name]: value });
-  }
+  };
 
   const handleOperationChange = ({ target: { value } }) => {
     setCalcData({ ...calcData, operation: value });
-  }
+  };
 
-  const handleAnswer = ans => {
+  const handleAnswer = (ans) => {
     setCalcData({ ...calcData, ans });
-  }
+  };
 
+  if (!calcData) {
+    throw new Error("unable to calc");
+  }
   const { firstNo, secondNo, ans, operation } = calcData;
 
   return (
@@ -59,26 +67,20 @@ function Calculator({ shouldFetchDefaultData = true, todos }) {
         handleOperationChange={handleOperationChange}
         handleAnswer={handleAnswer}
       />
-      <CalcResults
-        first={firstNo}
-        second={secondNo}
-        op={operation}
-        ans={ans}
-      />
+      <CalcResults first={firstNo} second={secondNo} op={operation} ans={ans} />
       <h2>top 3 todos:</h2>
-      <ul>
-
-      </ul>
-      {todos.length ?
-        todos.map(({ id, title }) => (<li key={id}>{title}</li>))
-        : <span>No todos left</span>}
+      <ul></ul>
+      {todos.length ? (
+        todos.map(({ id, title }) => <li key={id}>{title}</li>)
+      ) : (
+        <span>No todos left</span>
+      )}
     </div>
-  )
-
+  );
 }
 
 const mapStateToProps = ({ todosReducer: { todos } }) => ({
   todos: todos.length ? todos.slice(0, 3) : [],
-})
+});
 
 export default connect(mapStateToProps)(Calculator);
