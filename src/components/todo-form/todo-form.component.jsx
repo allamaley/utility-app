@@ -1,45 +1,34 @@
-import { useState } from 'react';
-import {connect} from 'react-redux'
-import { addTodo } from '../../redux/todos/todos.actions.js';
+import { useState } from "react";
 
 function TodoForm({ onNewTodo }) {
-
-  const [newTodo, setNewTodo] = useState(''); // returns an array of size 2. First element -> state variable (newTodo)
-  // Second element -> setter function used to set the state (setNewTodo)
+  const [newTodo, setNewTodo] = useState(""); // returns an array of size 2. First element -> state variable (newTodo)
   const [isDisabled, setIsDisabled] = useState(true);
-
 
   const handleChange = ({ target: { value } }) => {
     setNewTodo(value); //it is going to call render() -> rerender the current functional component
     setIsDisabled(!value);
-    // this.setState({
-    //   newTodo: value,
-    //   isDisabled: !value,
-    // })
-  }
+  };
 
   const saveTodo = () => {
     onNewTodo(newTodo);
 
-    setNewTodo('');
+    setNewTodo("");
     setIsDisabled(true);
-
-    // this.setState({
-    //   newTodo: '',
-    //   isDisabled: false,
-    // })
-  }
+  };
 
   return (
     <div className="todo-form">
-      <input type="text" value={newTodo} placeholder="Enter" onChange={handleChange} />
-      <button disabled={isDisabled} onClick={saveTodo}>Save</button>
+      <input
+        type="text"
+        value={newTodo}
+        placeholder="Enter"
+        onChange={handleChange}
+      />
+      <button disabled={isDisabled} onClick={saveTodo}>
+        Save
+      </button>
     </div>
-  )
+  );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onNewTodo : (newTodoTitle) => dispatch(addTodo(newTodoTitle))
-})
-
-export default connect(null, mapDispatchToProps)(TodoForm);
+export default TodoForm;
